@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${orbitron.variable}`}>
-      <body className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-pink-50">
+      <body className="min-h-screen bg-gradient-background">
         <Providers>
           <div className="flex flex-col min-h-screen">
             <Navbar />

@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Progress } from '@/components/ui/Progress'
-import { ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle, Zap, Camera } from 'lucide-react'
 import { useQuiz } from '@/components/providers/QuizProvider'
 import { QuizStep } from './QuizStep'
 import { QuizResults } from './QuizResults'
+import { FaceDetection } from './FaceDetection'
+import { type FaceAnalysis, getPersonalizedRecommendations } from '@/lib/faceDetection'
 
 const quizQuestions = [
   {
@@ -74,9 +76,12 @@ const quizQuestions = [
 export function QuizWizard() {
   const { state, nextStep, prevStep, answerQuestion, completeQuiz } = useQuiz()
   const [currentAnswer, setCurrentAnswer] = useState<string | string[]>([])
+  const [showFaceDetection, setShowFaceDetection] = useState(false)
+  const [faceAnalysis, setFaceAnalysis] = useState<FaceAnalysis | null>(null)
+  const [useFaceDetection, setUseFaceDetection] = useState(false)
 
   const currentQuestion = quizQuestions[state.currentStep]
-  const progress = ((state.currentStep + 1) / quizQuestions.length) * 100
+  const progress = ((state.currentStep + 1) / (quizQuestions.length + (useFaceDetection ? 1 : 0))) * 100
 
   const handleAnswer = (value: string | string[]) => {
     setCurrentAnswer(value)
@@ -98,16 +103,57 @@ export function QuizWizard() {
     }
   }
 
-  const generateResults = () => {
+  const handleFaceDetectionComplete = (analysis: FaceAnalysis) => {
+    setFaceAnalysis(analysis)
+    setShowFaceDetection(false)
+    
+    // Auto-answer face shape question if it exists
+    const faceShapeQuestion = quizQuestions.find(q => q.id === 'face-shape')
+    if (faceShapeQuestion) {
+      answerQuestion({
+        questionId: 'face-shape',
+        answer: analysis.faceShape.shape,
+        weight: analysis.faceShape.confidence
+      })
+    }
+    
+    // Continue to next question or complete quiz
+    if (state.currentStep < quizQuestions.length - 1) {
+      nextStep()
+      setCurrentAnswer([])
+    } else {
+      const result = generateResults(analysis)
+      completeQuiz(result)
+    }
+  }
+
+  const generateResults = (aiAnalysis?: FaceAnalysis) => {
     const answers = state.answers
-    const faceShape = answers.find(a => a.questionId === 'face-shape')?.answer as string
+    const faceShape = aiAnalysis?.faceShape.shape || answers.find(a => a.questionId === 'face-shape')?.answer as string
     const style = answers.find(a => a.questionId === 'style-preference')?.answer as string[]
     const lifestyle = answers.find(a => a.questionId === 'lifestyle')?.answer as string[]
     const colors = answers.find(a => a.questionId === 'colors')?.answer as string[]
     const budget = answers.find(a => a.questionId === 'budget')?.answer as string
 
-    // Generate recommendations based on answers
-    const recommendations = generateRecommendations(faceShape, style, lifestyle, colors, budget)
+    // Generate enhanced recommendations using AI analysis
+    let recommendations: string[] = []
+    let personalizedRecs: any = null
+
+    if (aiAnalysis) {
+      personalizedRecs = getPersonalizedRecommendations(aiAnalysis, {
+        style,
+        lifestyle,
+        colors,
+        budget
+      })
+      recommendations = [
+        ...personalizedRecs.primaryRecommendations,
+        ...personalizedRecs.styleMatches,
+        ...personalizedRecs.colorSuggestions
+      ]
+    } else {
+      recommendations = generateRecommendations(faceShape, style, lifestyle, colors, budget)
+    }
 
     return {
       faceShape,
@@ -115,6 +161,8 @@ export function QuizWizard() {
       lifestyle: lifestyle?.join(', ') || 'Mixed',
       colors: colors || [],
       recommendations,
+      aiAnalysis,
+      personalizedRecommendations: personalizedRecs,
       completedAt: new Date()
     }
   }
@@ -144,12 +192,47 @@ export function QuizWizard() {
     return [...new Set(recommendations)]
   }
 
+  if (showFaceDetection) {
+    return (
+      <FaceDetection
+        onAnalysisComplete={handleFaceDetectionComplete}
+        onSkip={() => setShowFaceDetection(false)}
+      />
+    )
+  }
+
   if (state.isCompleted && state.result) {
     return <QuizResults result={state.result} />
   }
 
   return (
     <div className="max-w-3xl mx-auto">
+      {/* AI Face Detection Intro */}
+      {state.currentStep === 0 && !useFaceDetection && (
+        <Card variant="neon" className="mb-8 animate-pulse-glow">
+          <CardContent className="p-6 text-center">
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <Zap className="w-6 h-6 text-primary" />
+              <h3 className="text-xl font-heading font-bold gradient-text">
+                AI-Powered Face Analysis
+              </h3>
+            </div>
+            <p className="text-neutral-gray mb-6">
+              Get more accurate recommendations with our advanced AI face shape detection
+            </p>
+            <div className="flex justify-center space-x-4">
+              <Button variant="neon" onClick={() => setShowFaceDetection(true)}>
+                <Camera className="w-4 h-4 mr-2" />
+                Try AI Analysis
+              </Button>
+              <Button variant="outline" onClick={() => setUseFaceDetection(false)}>
+                Continue with Quiz
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       <Card variant="glassmorphic" className="mb-8">
         <CardContent className="p-8">
           <div className="text-center mb-8">
@@ -157,8 +240,19 @@ export function QuizWizard() {
               <span className="gradient-text">Frame Finder Quiz</span>
             </h1>
             <p className="text-lg text-neutral-gray">
-              Answer a few questions to discover your perfect frames
+              {faceAnalysis 
+                ? 'Complete your personalized recommendations' 
+                : 'Answer a few questions to discover your perfect frames'
+              }
             </p>
+            {faceAnalysis && (
+              <div className="mt-4 inline-flex items-center space-x-2 bg-gradient-subtle px-4 py-2 rounded-full">
+                <Zap className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-primary">
+                  AI Analysis: {faceAnalysis.faceShape.shape.charAt(0).toUpperCase() + faceAnalysis.faceShape.shape.slice(1)} Face
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="mb-8">
