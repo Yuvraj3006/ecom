@@ -45,9 +45,12 @@ fi
 
 # Start the application
 echo -e "${GREEN}🎯 Starting CyberOptics platform...${NC}"
-echo -e "${CYAN}   Frontend: http://localhost:3000${NC}"
-echo -e "${CYAN}   Backend:  http://localhost:5000${NC}"
-echo -e "${CYAN}   Admin:    http://localhost:3000/admin${NC}"
+echo -e "${CYAN}   Frontend: http://0.0.0.0:3000${NC}"
+echo -e "${CYAN}   Backend:  http://0.0.0.0:5000${NC}"
+echo -e "${CYAN}   Admin:    http://0.0.0.0:3000/admin${NC}"
+echo ""
+echo -e "${YELLOW}📱 Access from any device on your network:${NC}"
+echo -e "${CYAN}   Replace 0.0.0.0 with your machine's IP address${NC}"
 echo ""
 echo -e "${PURPLE}🔑 Default Admin Login:${NC}"
 echo -e "${CYAN}   Email: admin@cyberoptics.com${NC}"
