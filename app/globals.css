@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-white text-neutral-dark font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+@layer components {
+  .glassmorphic {
+    @apply backdrop-blur-md bg-white/20 border border-white/30;
+  }
+  
+  .neon-glow {
+    @apply shadow-neon-glow;
+  }
+  
+  .neon-glow-strong {
+    @apply shadow-neon-glow-strong;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-primary text-white px-6 py-3 rounded-button font-medium transition-all duration-300 hover:shadow-neon-glow hover:scale-105 active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-primary border-2 border-primary px-6 py-3 rounded-button font-medium transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-neon-glow;
+  }
+  
+  .card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/30 rounded-card shadow-soft-card hover:shadow-soft-card-hover transition-all duration-300;
+  }
+  
+  .card-glassmorphic {
+    @apply glassmorphic rounded-card shadow-glassmorphic;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300;
+  }
+  
+  .quiz-option {
+    @apply p-4 border-2 border-gray-200 rounded-lg cursor-pointer transition-all duration-300 hover:border-primary hover:shadow-soft-card;
+  }
+  
+  .quiz-option.selected {
+    @apply border-primary bg-gradient-subtle shadow-neon-glow;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}

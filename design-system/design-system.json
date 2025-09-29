@@ -1,0 +1,64 @@
+{
+  "colors": {
+    "primary": "#FF0080",
+    "secondary": "#FFFFFF",
+    "accent": "#B026FF",
+    "neutralDark": "#111111",
+    "neutralLight": "#F8F9FA",
+    "neutralGray": "#6B7280",
+    "gradientPrimary": "linear-gradient(135deg, #FF0080 0%, #B026FF 100%)",
+    "gradientHover": "linear-gradient(135deg, #FF4DB8 0%, #C158FF 100%)",
+    "gradientSubtle": "linear-gradient(135deg, rgba(255,0,128,0.1) 0%, rgba(176,38,255,0.1) 100%)"
+  },
+  "typography": {
+    "heading": "Orbitron, sans-serif",
+    "body": "Inter, sans-serif",
+    "sizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "3.75rem"
+    }
+  },
+  "shadows": {
+    "neonGlow": "0 0 12px rgba(255,0,128,0.5)",
+    "neonGlowStrong": "0 0 20px rgba(255,0,128,0.8)",
+    "softCard": "0 4px 12px rgba(0,0,0,0.08)",
+    "softCardHover": "0 8px 24px rgba(0,0,0,0.12)",
+    "glassmorphic": "0 8px 32px rgba(255,255,255,0.1)"
+  },
+  "radius": {
+    "card": "1.25rem",
+    "button": "9999px",
+    "input": "0.75rem",
+    "modal": "1.5rem"
+  },
+  "spacing": {
+    "xs": "0.25rem",
+    "sm": "0.5rem",
+    "md": "1rem",
+    "lg": "1.5rem",
+    "xl": "2rem",
+    "2xl": "3rem",
+    "3xl": "4rem"
+  },
+  "breakpoints": {
+    "sm": "640px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1280px",
+    "2xl": "1536px"
+  },
+  "animations": {
+    "fadeIn": "fadeIn 0.3s ease-in-out",
+    "slideUp": "slideUp 0.4s ease-out",
+    "glow": "glow 2s ease-in-out infinite alternate",
+    "pulse": "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+  }
+}
