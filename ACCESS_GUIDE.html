@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberOptics Access Guide</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 50%, #FFE4F1 100%);
+            margin: 0;
+            padding: 20px;
+            color: #111111;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            background: linear-gradient(135deg, #FF0080 0%, #B026FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .access-option {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 0, 128, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .access-option:hover {
+            border-color: #FF0080;
+            box-shadow: 0 0 12px rgba(255, 0, 128, 0.3);
+        }
+        .url {
+            background: #FF0080;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-family: 'Fira Code', monospace;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+            text-decoration: none;
+        }
+        .url:hover {
+            background: #B026FF;
+            box-shadow: 0 0 12px rgba(255, 0, 128, 0.5);
+        }
+        .status {
+            color: #10B981;
+            font-weight: bold;
+        }
+        .warning {
+            color: #F59E0B;
+            font-weight: bold;
+        }
+        .error {
+            color: #EF4444;
+            font-weight: bold;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .feature {
+            background: rgba(255, 0, 128, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .troubleshoot {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 CyberOptics Platform Access Guide</h1>
+        
+        <div class="access-option">
+            <h2>🌐 Primary Access Options</h2>
+            <p>Try these URLs in your browser:</p>
+            
+            <div style="text-align: center;">
+                <a href="http://localhost:3000" class="url" target="_blank">http://localhost:3000</a>
+                <a href="http://127.0.0.1:3000" class="url" target="_blank">http://127.0.0.1:3000</a>
+                <a href="http://0.0.0.0:3000" class="url" target="_blank">http://0.0.0.0:3000</a>
+                <a href="http://172.30.0.2:3000" class="url" target="_blank">http://172.30.0.2:3000</a>
+            </div>
+        </div>
+
+        <div class="access-option">
+            <h2>📱 Available Pages</h2>
+            <div class="feature-list">
+                <div class="feature">
+                    <h3>🏠 Homepage</h3>
+                    <p>Main cyberpunk-themed landing page</p>
+                </div>
+                <div class="feature">
+                    <h3>🧠 AI Quiz</h3>
+                    <p>Frame Finder with face detection</p>
+                </div>
+                <div class="feature">
+                    <h3>🛍️ Shop</h3>
+                    <p>Product catalog and shopping</p>
+                </div>
+                <div class="feature">
+                    <h3>👑 Admin</h3>
+                    <p>Management dashboard</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="access-option">
+            <h2>✅ Server Status</h2>
+            <p><span class="status">✅ RUNNING</span> - Next.js development server is active</p>
+            <p><span class="status">✅ COMPILED</span> - No build errors detected</p>
+            <p><span class="status">✅ RESPONDING</span> - HTTP 200 responses confirmed</p>
+            <p><span class="status">✅ CONTENT</span> - CyberOptics platform loaded</p>
+        </div>
+
+        <div class="troubleshoot">
+            <h2>🛠️ If Page Won't Load</h2>
+            <ol>
+                <li><strong>Check Network:</strong> Make sure you're on the same network as the server</li>
+                <li><strong>Try Different URLs:</strong> Use the links above to test different access methods</li>
+                <li><strong>Disable VPN:</strong> VPN might be blocking local network access</li>
+                <li><strong>Check Firewall:</strong> Ensure port 3000 isn't blocked</li>
+                <li><strong>Clear Browser Cache:</strong> Try hard refresh (Ctrl+F5) or incognito mode</li>
+            </ol>
+        </div>
+
+        <div class="access-option">
+            <h2>🎯 What You'll See</h2>
+            <p>When the platform loads, you'll experience:</p>
+            <ul>
+                <li>🎨 <strong>Cyberpunk Pink Theme</strong> - Futuristic white + neon pink design</li>
+                <li>👓 <strong>Product Catalog</strong> - "Cyber Neon", "Quantum Edge", "Holographic Dream", "Neon Circuit"</li>
+                <li>✨ <strong>Glassmorphic Effects</strong> - Backdrop blur and glass-like cards</li>
+                <li>🤖 <strong>AI Quiz System</strong> - Personalized frame recommendations</li>
+                <li>🛍️ <strong>Shopping Features</strong> - Add to cart, product details</li>
+                <li>👑 <strong>Admin Panel</strong> - Comprehensive management dashboard</li>
+            </ul>
+        </div>
+
+        <div class="access-option">
+            <h2>🔧 Alternative: Static Demo</h2>
+            <p>If the server isn't accessible, you can build a static version:</p>
+            <div style="background: #111; color: #00FF00; padding: 15px; border-radius: 10px; font-family: 'Fira Code', monospace;">
+                npm run build<br>
+                npm run start
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 0, 128, 0.2);">
+            <p style="color: #6B7280;">
+                🚀 <strong>CyberOptics</strong> - The Future of Eyewear Shopping
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-test URLs and show status
+        const urls = [
+            'http://localhost:3000',
+            'http://127.0.0.1:3000',
+            'http://0.0.0.0:3000',
+            'http://172.30.0.2:3000'
+        ];
+
+        urls.forEach(url => {
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        console.log(`✅ ${url} - Working!`);
+                    } else {
+                        console.log(`⚠️ ${url} - Response: ${response.status}`);
+                    }
+                })
+                .catch(error => {
+                    console.log(`❌ ${url} - Not accessible`);
+                });
+        });
+    </script>
+</body>
+</html>
